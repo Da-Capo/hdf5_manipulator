@@ -37,8 +37,8 @@ def save(filename, data):
     f = h5py.File(filename, 'w')
 
     for key in data:
-        f.create_dataset(key, data[key].shape, dtype=data[key].dtype,
-                         compression='gzip')[...] = data[key]
+        f.create_dataset(key, data[key].shape, 
+                         dtype=data[key].dtype)[...] = data[key]
 
     f.close()
 
@@ -78,7 +78,6 @@ def save_subset_big(filename, data, begin, end):
     for key in data:
         shape = list(data[key].shape)
         shape[0] = end - begin
-        o.create_dataset(key, shape, dtype=data[key].dtype,
-                         compression='gzip')[...] = data[key][begin:end]
+        o.create_dataset(key, shape, dtype=data[key].dtype)[...] = data[key][begin:end]
 
     o.close()
